@@ -24,9 +24,9 @@ goreddit
 CMD + double-click on links inside the terminal, and they will be opened up in a new tab in your browser.
 
 ### flag options
-
+example showing all flag options
 ```
-
+goreddit -subreddit jokes -posts 5 -comments 3
 ```
 
 #### -subreddit
