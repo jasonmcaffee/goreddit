@@ -7,5 +7,5 @@ import (
 
 func main(){
 	fmt.Println("root main")
-	goreddit.Reddit()
+	goreddit.GoReddit()
 }
