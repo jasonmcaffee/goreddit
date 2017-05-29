@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"goreddit/goreddit"
+)
 
 func main(){
 	fmt.Println("root main")
+	goreddit.Reddit()
 }
