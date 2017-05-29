@@ -1,0 +1,4 @@
+package: goreddit
+import:
+- package: github.com/fatih/color
+  version: ^1.5.0
