@@ -18,6 +18,7 @@ export PATH=$PATH:$GOPATH/bin
 goreddit
 ```
 
+![Alt text](goreddit-terminal.png?raw=true "Optional Title")
 ## interactions
 ### urls
 CMD + double-click on links inside the terminal, and they will be opened up in a new tab in your browser.
