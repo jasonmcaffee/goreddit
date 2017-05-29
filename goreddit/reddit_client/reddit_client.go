@@ -99,9 +99,9 @@ func FetchCommentsForPost(postID string, limit int) ([]RedditCommentContainer, e
 	return redditCommentContainers, err
 }
 
-func FetchSubredditPosts(after string, before string, limit int) (resp RedditSubredditPostsResultContainer, nextAfter string, nextBefore string, err error) {
+func FetchSubredditPosts(subreddit string, after string, before string, limit int) (resp RedditSubredditPostsResultContainer, nextAfter string, nextBefore string, err error) {
 	//fmt.Println("\n ......fetching posts...... ")
-	url := fmt.Sprintf("https://www.reddit.com/r/all/top.json?limit=%s&after=%s&before=%s", strconv.Itoa(limit), after, before)
+	url := fmt.Sprintf("https://www.reddit.com/r/%s/top.json?limit=%s&after=%s&before=%s", subreddit, strconv.Itoa(limit), after, before)
 	request, _ := http.NewRequest("GET", url, nil)
 	request.Header.Add("Content-Type", "application/json")
 
@@ -116,7 +116,7 @@ func FetchSubredditPosts(after string, before string, limit int) (resp RedditSub
 	if r.StatusCode == 429 {
 		//fmt.Println("done fetching. status code 429 (rate limiting by reddit) retrying shortly...: ", r.StatusCode)
 		time.Sleep(500 * time.Millisecond)
-		return FetchSubredditPosts(after, before, limit)
+		return FetchSubredditPosts(subreddit, after, before, limit)
 	}
 	responseBody, _ := ioutil.ReadAll(r.Body)
 	err = json.Unmarshal(responseBody, &result)

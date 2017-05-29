@@ -7,7 +7,7 @@ go get -u github.com/jasonmcaffee/goreddit
 ```
 
 Ensure your $GOPATH environment variable is set and added to your $PATH
-e.g.
+e.g. ~/.bash_profile
 ```
 export GOPATH=/Users/you/Documents/dev/go
 export GOROOT=/usr/local/Cellar/go/1.8/libexec
@@ -18,3 +18,8 @@ export PATH=$PATH:$GOPATH/bin
 goreddit
 ```
 
+### flag options
+
+#### -subreddit
+name of the subreddit to retrieve posts from.
+defaults to "all" for r/all

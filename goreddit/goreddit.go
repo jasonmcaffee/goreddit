@@ -23,7 +23,7 @@ type (
 //showing sophisticated use of channels
 //fetch posts in batches to demonstrate channel usage
 //fetch comments for each post received
-func GoReddit() {
+func GoReddit(subreddit string) {
 	postsChannel := make(chan ([]Post))
 	postWithCommentsChannel := make(chan (Post))
 
@@ -31,7 +31,7 @@ func GoReddit() {
 
 	wg.Add(1)
 	go func() {
-		fetchSubredditPostsUsingChannel(10, 10, "", "", postsChannel)
+		fetchSubredditPostsUsingChannel(subreddit, 10, 10, "", "", postsChannel)
 		wg.Done()
 	}()
 
@@ -77,9 +77,9 @@ DONERECEIVINGPOSTS:
 	close(outChannel)
 }
 
-func fetchSubredditPostsUsingChannel(limit int, remaining int, after string, before string, outChannel chan ([]Post)) {
+func fetchSubredditPostsUsingChannel(subreddit string, limit int, remaining int, after string, before string, outChannel chan ([]Post)) {
 	//fmt.Println("fetch subreddit posts using channel. limit:%s  remaining:%s", limit, remaining)
-	posts, nextAfter, nextBefore, err := fetchSubredditPosts(after, before, limit)
+	posts, nextAfter, nextBefore, err := fetchSubredditPosts(subreddit, after, before, limit)
 	if err != nil {
 		close(outChannel)
 		return
@@ -91,15 +91,15 @@ func fetchSubredditPostsUsingChannel(limit int, remaining int, after string, bef
 	remaining = remaining - len(posts)
 	//fetch more if needed
 	if remaining > 0 {
-		fetchSubredditPostsUsingChannel(limit, remaining, nextAfter, nextBefore, outChannel)
+		fetchSubredditPostsUsingChannel(subreddit, limit, remaining, nextAfter, nextBefore, outChannel)
 	} else {
 		//fmt.Println("fetch subreddit posts closing channel")
 		close(outChannel)
 	}
 }
 
-func fetchSubredditPosts(after string, before string, limit int) (posts []Post, nextAfter string, nextBefore string, err error) {
-	postsResultsContainer, nAfter, nBefore, err := reddit_client.FetchSubredditPosts(after, before, limit)
+func fetchSubredditPosts(subreddit string, after string, before string, limit int) (posts []Post, nextAfter string, nextBefore string, err error) {
+	postsResultsContainer, nAfter, nBefore, err := reddit_client.FetchSubredditPosts(subreddit, after, before, limit)
 	posts = []Post{}
 	if err == nil {
 		posts = mapRedditPostsToOurModel(postsResultsContainer)
