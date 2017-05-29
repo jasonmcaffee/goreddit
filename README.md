@@ -25,6 +25,10 @@ CMD + double-click on links inside the terminal, and they will be opened up in a
 
 ### flag options
 
+```
+
+```
+
 #### -subreddit
 name of the subreddit to retrieve posts from.
 defaults to "all" for r/all
@@ -32,3 +36,7 @@ defaults to "all" for r/all
 #### -comments
 number of top comments to retrieve for each post
 defaults to 5
+
+#### -posts
+number of posts to retrieve
+defaults to 10
