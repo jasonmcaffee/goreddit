@@ -12,7 +12,7 @@ import (
 var redditClient *http.Client
 
 func init() {
-	fmt.Println("creating reddit client")
+	//fmt.Println("creating reddit client")
 	redditClient = &http.Client{
 		Timeout: 60 * time.Second,
 		Transport: &http.Transport{

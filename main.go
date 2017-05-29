@@ -6,6 +6,6 @@ import (
 )
 
 func main(){
-	fmt.Println("root main")
+	fmt.Println("fetching posts")
 	goreddit.GoReddit()
 }
