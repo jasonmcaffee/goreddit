@@ -8,6 +8,7 @@ import (
 	"github.com/fatih/color"
 )
 
+//CreatePostView returns an instance which implements IPostView (has Render func, etc)
 func CreatePostView() IPostView {
 	return &SimpleTerminalPostView{}
 }
@@ -23,6 +24,7 @@ type (
 	}
 )
 
+//Render will display colored text for the post and its comments to the terminal window
 func (s *SimpleTerminalPostView) Render(post models.Post) {
 	//fmt.Println(color.RedString("########################################################################"))
 	color.Cyan("------------------------------------------------------------------------------------------")
@@ -34,17 +36,19 @@ func (s *SimpleTerminalPostView) Render(post models.Post) {
 
 	c = color.New(color.BgHiBlack).Add(color.Bold)
 	fmt.Println(post.SelfText)
-	s.displayComments(post)
+	s.renderComments(post)
 }
 
-func (s *SimpleTerminalPostView) displayComments(post models.Post) {
+//displays each comment for a given post
+func (s *SimpleTerminalPostView) renderComments(post models.Post) {
 	//fmt.Println("  -- Comments --  " + post.ID)
 	for _, comment := range post.Comments {
-		s.displayComment(comment)
+		s.renderComment(comment)
 	}
 }
 
-func (s *SimpleTerminalPostView) displayComment(comment string) {
+//displays comment for a given post
+func (s *SimpleTerminalPostView) renderComment(comment string) {
 	commentLines := strings.Split(comment, "\n")
 	fmt.Print("   -  ") //indicate comment and indent
 	for i, commentLine := range commentLines {
