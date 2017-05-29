@@ -10,12 +10,12 @@ import (
 
 //GoReddit fetches posts and associated comments for a given subreddit, utilizing a IPostView to render them
 //Channels are used to fetch posts in batches, fetch comments for posts, and rendering the post with comments.
-func GoReddit(subreddit string) {
+func GoReddit(subreddit string, commentsPerPost int) {
 	postsChannel := make(chan ([]models.Post))
 	postWithCommentsChannel := make(chan (models.Post))
 
 	go fetchSubredditPostsUsingChannel(subreddit, 10, 10, "", "", postsChannel)
-	go fetchCommentsForPostsReceivedOnChannel(5, postsChannel, postWithCommentsChannel)
+	go fetchCommentsForPostsReceivedOnChannel(commentsPerPost, postsChannel, postWithCommentsChannel)
 	//block until all posts with comments have been received and displayed
 	displayPostsWithCommentsReceivedOnChannel(postWithCommentsChannel)
 }
@@ -24,7 +24,7 @@ func GoReddit(subreddit string) {
 //to the passed in outChannel.
 //WaitGroup is used so we can get comments for multiple posts at the same time.
 func fetchCommentsForPostsReceivedOnChannel(commentLimit int, postsChannel chan ([]models.Post), outChannel chan (models.Post)) {
-	var wg sync.WaitGroup
+	var wg sync.WaitGroup //wait for all comments to be retrieved before exiting
 	for {
 		select {
 		case posts, ok := <-postsChannel:

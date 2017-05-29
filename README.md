@@ -28,3 +28,7 @@ CMD + double-click on links inside the terminal, and they will be opened up in a
 #### -subreddit
 name of the subreddit to retrieve posts from.
 defaults to "all" for r/all
+
+#### -comments
+number of top comments to retrieve for each post
+defaults to 5
