@@ -18,6 +18,10 @@ export PATH=$PATH:$GOPATH/bin
 goreddit
 ```
 
+## interactions
+### urls
+CMD + double-click on links inside the terminal, and they will be opened up in a new tab in your browser.
+
 ### flag options
 
 #### -subreddit

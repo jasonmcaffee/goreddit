@@ -165,9 +165,14 @@ func displayPosts(posts []Post) {
 func displayPost(post Post) {
 	//fmt.Println(color.RedString("########################################################################"))
 	color.Cyan("------------------------------------------------------------------------------------------")
-	fmt.Println("### ", post.Title)
-	fmt.Println("", post.Url)
-	fmt.Println("", post.SelfText)
+	c := color.New(color.BgCyan).Add(color.FgBlack).Add(color.Bold)
+	c.Println( post.Title)
+
+	c = color.New(color.FgCyan).Add(color.Bold)
+	c.Println(post.Url)
+
+	c = color.New(color.BgHiBlack).Add(color.Bold)
+	fmt.Println(post.SelfText)
 	displayComments(post)
 }
 
