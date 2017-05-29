@@ -11,7 +11,7 @@ import (
 func main(){
 	subreddit, commentsPerPost := getApplicationFlags()
 
-	fmt.Printf("fetching posts for: r/%s. comments per post: %s", subreddit, strconv.Itoa(commentsPerPost))
+	fmt.Printf("fetching posts for: r/%s. comments per post: %s \n", subreddit, strconv.Itoa(commentsPerPost))
 	goreddit.GoReddit(subreddit, commentsPerPost)
 }
 
