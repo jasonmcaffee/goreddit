@@ -38,6 +38,7 @@ type (
 		Title string
 		Url   string
 		ID    string
+		SelfText string //e.g. askreddit question, joke punchline, etc
 	}
 
 	//get back an array of these, but only 1

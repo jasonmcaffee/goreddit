@@ -15,6 +15,7 @@ type (
 		ID       string
 		Url      string
 		Title    string
+		SelfText string
 		Comments []string
 	}
 )
@@ -133,6 +134,7 @@ func mapRedditPostsToOurModel(redditPosts reddit_client.RedditSubredditPostsResu
 			ID:    redditPost.ID,
 			Title: redditPost.Title,
 			Url:   redditPost.Url,
+			SelfText: redditPost.SelfText,
 		}
 		posts = append(posts, post)
 	}
@@ -161,10 +163,11 @@ func displayPosts(posts []Post) {
 }
 
 func displayPost(post Post) {
-	fmt.Println(color.RedString("########################################################################"))
+	//fmt.Println(color.RedString("########################################################################"))
 	color.Cyan("------------------------------------------------------------------------------------------")
 	fmt.Println("### ", post.Title)
 	fmt.Println("", post.Url)
+	fmt.Println("", post.SelfText)
 	displayComments(post)
 }
 
