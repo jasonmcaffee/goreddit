@@ -100,7 +100,7 @@ func FetchCommentsForPost(postID string, limit int) ([]RedditCommentContainer, e
 }
 
 func FetchSubredditPosts(after string, before string, limit int) (resp RedditSubredditPostsResultContainer, nextAfter string, nextBefore string, err error) {
-	fmt.Println("\n ......fetching posts...... ")
+	//fmt.Println("\n ......fetching posts...... ")
 	url := fmt.Sprintf("https://www.reddit.com/r/all/top.json?limit=%s&after=%s&before=%s", strconv.Itoa(limit), after, before)
 	request, _ := http.NewRequest("GET", url, nil)
 	request.Header.Add("Content-Type", "application/json")
